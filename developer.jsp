@@ -16,7 +16,7 @@
 			<li>Toshinori Umezaki
 				<a href="">github</a>
 			<li>Ryohei Tokunaga
-				<a href="">github</a>
+				<a href=""https://github.com/toshi10411041</a>
 			<li>Mio Yamashita
 				<a href="https://github.com/miohuh">githubprof</a>
 		</ul>
