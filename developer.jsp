@@ -18,7 +18,7 @@
 			<li>Ryohei Tokunaga
 				<a href="">github</a>
 			<li>Mio Yamashita
-				<a href="https://github.com/miohuh/dokoTsubu.git">miohuh/dokoTsubu.git</a>
+				<a href="https://github.com/miohuh">githubprof</a>
 		</ul>
 
 </body>
