@@ -7,7 +7,7 @@
 - Login機能およびGroup機能
 - 個人Todo List
 - Scheduleのシェア
-- チャット機能
+- Chat機能
 
 ## 【機能概要】
 
