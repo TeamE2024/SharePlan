@@ -2,10 +2,13 @@
 SharePlan
 # 【アプリケーション概要】
 ユーザがブラウザより下記機能を利用できるアプリを提供する。
-	・Login機能およびGroup機能
-	・個人Todo List
-	・Scheduleのシェア
-	・チャット機能
+・Login機能およびGroup機能
+
+・個人Todo List
+
+・Scheduleのシェア
+
+・チャット機能
 # 【機能概要】
 　・Login機能およびGroup機能
 　　個人で使用できるTodo Listを作成およびGroupCodeで認証後使用できるScheduleおよびチャット機能を提供
