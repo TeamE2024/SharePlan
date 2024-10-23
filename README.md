@@ -4,18 +4,18 @@
 ## 【アプリケーション概要】
 ユーザがブラウザより下記機能を利用できるアプリを提供する。
 
-- ・Login機能およびGroup機能
-- ・個人Todo List
-- ・Scheduleのシェア
-- ・チャット機能
+- Login機能およびGroup機能
+- 個人Todo List
+- Scheduleのシェア
+- チャット機能
 
 ## 【機能概要】
 
-・Login機能およびGroup機能
+- Login機能およびGroup機能
 
 個人で使用できるTodo Listを作成およびGroupCodeで認証後使用できるScheduleおよびチャット機能を提供
 
-・Todoリスト(個人)
+- Todoリスト(個人)
 
 Main画面に「Todo List」として作成。
 
@@ -23,7 +23,7 @@ Main画面に「Todo List」として作成。
 　
 ※画面レイアウト、および動作は別資料「画面設計書」を参照。
 
-・Scheduleのシェア
+- Scheduleのシェア
 
 Group Share画面に「Schedule」として作成。
 
@@ -31,7 +31,7 @@ Group Share画面に「Schedule」として作成。
 
 ※画面レイアウト、および動作は別資料「画面設計書」を参照。
 
-・Chat 機能
+- Chat 機能
 
 Group Share画面に「Chat」として作成。
 
@@ -41,4 +41,13 @@ Group Share画面に「Chat」として作成。
 
 # 使用している主な技術
 
-##
+## 【使用言語】
+- Java
+- HTML
+- CSS
+
+## 【データベース】
+- PostgreSQL
+
+## 【開発環境】
+- Eclipse
