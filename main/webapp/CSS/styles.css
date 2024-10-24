@@ -157,14 +157,26 @@ img {
 	table-layout: fixed;
 }
 
+.lists-back-ground-todoChat th,
+.lists-back-ground-todoChat td {
+	padding: 8px;
+	/* セル内のパディング */
+	text-align: center;
+	/* 中央揃え */
+}
+
+.lists-back-ground-todoChat tr {
+	border-bottom: solid #f5f5f5 1px;
+	/*borderの指定*/
+	padding-bottom: 5px;
+	/*余白の指定*/
+}
+
 .todoChat th {
 	padding: 8px;
 	/* セル内のパディング */
 	text-align: center;
 	/* 中央揃え */
-	flex: 0 0 auto;
-	/* 固定幅を設定 */
-
 }
 
 .todoChat td {
@@ -184,11 +196,14 @@ img {
 
 /* ボタン列のセルの幅を設定 */
 .lists-back-ground-todoChat td.button-cell {
-    width: 50px; /* お好みの幅に調整 */
+	width: 50px;
+	/* お好みの幅に調整 */
 }
+
 /* ボタン列のセルの幅を設定 */
 .lists-back-ground-todoChat th.button-cell {
-    width: 50px; /* お好みの幅に調整 */
+	width: 50px;
+	/* お好みの幅に調整 */
 }
 
 .todoChat tr {
@@ -321,8 +336,9 @@ img {
 
 /*インプットに関連するオプション類*/
 .input-option {
-	width: auto;
+	width: 100%;
 	max-width: 90%;
+	display: flex;
 	margin: 0 var(--small);
 	padding: var(--small);
 	justify-content: center;
@@ -365,7 +381,7 @@ img {
 	/* ホバー時の背景色を変更 */
 }
 
-/*カレンダーの月移動ボタン*/
+/*カレンダーの月移動ボタン、達成前ボタン*/
 .button_month {
 	background-color: #fffacd;
 	border: double 3px #cd5c5c;
@@ -385,6 +401,26 @@ img {
 	background-color: #cd5c5c;
 }
 
+/*達成済ボタン*/
+.button_done {
+	background-color: #DEEFE0;
+	border: double 3px #0094CE;
+	color: #0076A9;
+	/*文字色*/
+	border-radius: 5px;
+	padding: 0px 7px;
+	text-decoration: none;
+	white-space: nowrap;
+	/* テキストを折り返さない */
+	overflow: hidden;
+	/* はみ出した部分を隠す */
+}
+
+.button_done:hover {
+	color: #DEEFE0;
+	background-color: #0076A9;
+}
+
 
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
@@ -400,7 +436,7 @@ img {
 	}
 
 	.btn {
-		width: 90%;
+		width: auto;
 		height: auto;
 		padding: 0.5rem 0.75rem;
 		/* パディングを調整 */
@@ -521,7 +557,7 @@ img {
 	}
 
 	.btn {
-		width: 90%;
+		width: auto;
 		/* 幅を90%に設定 */
 		height: auto;
 		/* 高さを自動に */
