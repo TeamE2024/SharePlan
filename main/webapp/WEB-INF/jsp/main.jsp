@@ -28,73 +28,71 @@ String group_error_message = (String) request.getAttribute("group_error_message"
 		<div class="action-area">
 			<form action="Main" method="post" class="todoChat">
 				<div class="lists-back-ground-todoChat">
-						<table>
+					<table>
+						<%
+						for (Todolist todolist : todoList) {
+						%>
+						<tr>
 							<%
-							for (Todolist todolist : todoList) {
+							if (todolist.isComplete()) {
 							%>
-							<tr>
-								<%
-								if (todolist.isComplete()) {
-								%>
-								<th class="button-cell"><input type="radio" name="select"
-									value=<%=todolist.getId()%>></th>
-								<th><%=todolist.getTodo_day()%></th>
-								<td><del><%=todolist.getList()%></del></td>
+							<th><input type="radio" name="select"
+								value=<%=todolist.getId()%>> <%=todolist.getTodo_day()%></th>
+							<td><del><%=todolist.getList()%></del></td>
 
 
-								<%
-								if (todolist.isComplete()) {
-								%>
-								<td class="button-cell"><input type="hidden" name="complete"
-									value=<%=todolist.isComplete()%>>
-									<button type="submit" name="getData"
-										value=<%=todolist.getId()%> class="button_month">済</button></td>
-								<%
-								} else {
-								%>
-								<td class="button-cell"><input type="hidden" name="complete"
-									value=<%=todolist.isComplete()%>>
-									<button type="submit" name="getData"
-										value=<%=todolist.getId()%> class="button_month">達成</button></td>
-								<%
-								}
-								%>
-							</tr>
-
+							<%
+							if (todolist.isComplete()) {
+							%>
+							<td><input type="hidden" name="complete"
+								value=<%=todolist.isComplete()%>>
+								<button type="submit" name="getData" value=<%=todolist.getId()%>
+									class="button_done">済</button></td>
 							<%
 							} else {
 							%>
-							<tr>
-								<th><input type="radio" name="select"
-									value=<%=todolist.getId()%>></th>
-								<th><%=todolist.getTodo_day()%></th>
-								<td  class="large-cell"><%=todolist.getList()%></td>
+							<td><input type="hidden" name="complete"
+								value=<%=todolist.isComplete()%>>
+								<button type="submit" name="getData" value=<%=todolist.getId()%>
+									class="button_month">達成</button></td>
+							<%
+							}
+							%>
+						</tr>
 
-								<%
-								if (todolist.isComplete()) {
-								%>
-								<td><input type="hidden" name="complete"
-									value=<%=todolist.isComplete()%>>
-									<button type="submit" name="getData"
-										value=<%=todolist.getId()%> class="button_month">済</button></td>
-								<%
-								} else {
-								%>
-								<td><input type="hidden" name="complete"
-									value=<%=todolist.isComplete()%>>
-									<button type="submit" name="getData"
-										value=<%=todolist.getId()%> class="button_month">達成</button></td>
-								<%
-								}
-								%>
-							</tr>
+						<%
+						} else {
+						%>
+						<tr>
+							<th><input type="radio" name="select"
+								value=<%=todolist.getId()%>> <%=todolist.getTodo_day()%></th>
+							<td><%=todolist.getList()%></td>
+
+							<%
+							if (todolist.isComplete()) {
+							%>
+							<td><input type="hidden" name="complete"
+								value=<%=todolist.isComplete()%>>
+								<button type="submit" name="getData" value=<%=todolist.getId()%>
+									class="button_done">済</button></td>
+							<%
+							} else {
+							%>
+							<td><input type="hidden" name="complete"
+								value=<%=todolist.isComplete()%>>
+								<button type="submit" name="getData" value=<%=todolist.getId()%>
+									class="button_month">達成</button></td>
 							<%
 							}
 							%>
-							<%
-							}
-							%>
-						</table>
+						</tr>
+						<%
+						}
+						%>
+						<%
+						}
+						%>
+					</table>
 				</div>
 
 				<div class="input-area-todo">
@@ -119,8 +117,8 @@ String group_error_message = (String) request.getAttribute("group_error_message"
 							class="input-text">
 					</div>
 					<%
-				} else {
-				%>
+					} else {
+					%>
 					<div class="input-area">
 						<label>Todo:</label><input type="text" name="list"
 							value=<%=beforeList%> class="input-text">
@@ -130,8 +128,8 @@ String group_error_message = (String) request.getAttribute("group_error_message"
 							value=<%=beforeDate%> class="input-text">
 					</div>
 					<%
-				}
-				%>
+					}
+					%>
 
 					<div class="input-option">
 						<div class="input-button-area">
@@ -143,48 +141,46 @@ String group_error_message = (String) request.getAttribute("group_error_message"
 					</div>
 				</div>
 			</form>
-	</div>
+		</div>
 
-	<br>
-	<br>
-	<br>
-	<h1>Group Room</h1>
-	<div class="action-area">
-		<div class="lists-back-ground">
-			<div class="lists-table">
-				Group名は以下の条件に合うように入力してください <br> <br> ・ 10文字以上、16桁以下 <br>
-				・記号、大文字小文字アルファベット、数字を含む <br>
-				<%
-				if (group_error_message != null) {
-				%>
-				<p class="error"><%=group_error_message%></p>
-				<%
-				}
-				%>
-				<table>
-					<tr>
-						<form action="GroupLogin" method="post"
-							class="input-area inline-form">
-							<td>Group Login：</td>
-							<td><input type="text" name="group_login" class="input-text"></td>
-							<td><input type="submit" value="入室" class="btn"></td>
-						</form>
-					</tr>
-					<tr>
-						<form action="GroupRegister" method="post"
-							class="input-area inline-form">
-							<td>Group Create：</td>
-							<td><input type="text" name="group_create"
-								class="input-text"></td>
-							<td><input type="submit" value="追加" class="btn"></td>
-						</form>
-					</tr>
-				</table>
+		<br> <br> <br>
+		<h1>Group Room</h1>
+		<div class="action-area">
+			<div class="lists-back-ground">
+				<div class="lists-table">
+					Group名は以下の条件に合うように入力してください <br> <br> ・ 10文字以上、16桁以下 <br>
+					・記号、大文字小文字アルファベット、数字を含む <br>
+					<%
+					if (group_error_message != null) {
+					%>
+					<p class="error"><%=group_error_message%></p>
+					<%
+					}
+					%>
+					<table>
+						<tr>
+							<form action="GroupLogin" method="post"
+								class="input-area inline-form">
+								<td>Group Login：</td>
+								<td><input type="text" name="group_login"
+									class="input-text"></td>
+								<td><input type="submit" value="入室" class="btn"></td>
+							</form>
+						</tr>
+						<tr>
+							<form action="GroupRegister" method="post"
+								class="input-area inline-form">
+								<td>Group Create：</td>
+								<td><input type="text" name="group_create"
+									class="input-text"></td>
+								<td><input type="submit" value="追加" class="btn"></td>
+							</form>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
-	<a href="UserLogout">User Logout</a>
-	<br>
+		<a href="UserLogout">User Logout</a> <br>
 	</div>
 </body>
 </html>

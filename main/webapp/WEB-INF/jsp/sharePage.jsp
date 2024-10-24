@@ -128,10 +128,13 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				if (editPlanList == null) {
 				%>
 				<div class="input-option">
-					<input type="text" name="scheduleCom"> <input type=date
-						name="day"> <input type=time name="time">
+					<input type="text" name="scheduleCom" class="input-text">
 				</div>
-				<div class="input-option">
+				<div class="input-option inline-form">
+					<input type=date name="day" class="input-text">
+					<input type=time name="time" class="input-text">
+				</div>
+				<div class="input-button-area">
 					<input type="submit" value="追加" name="submit" class="btn">
 					<%
 					}
@@ -143,11 +146,14 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 					<%
 					for (ScheduleData plan : editPlanList) {
 					%>
-					<input type="text" name="editCom" value="<%=plan.getPlan()%>" class="input-text">
-					<input type=date name="editDay" value="<%=plan.getPlan_day()%>" class="input-text">
-					<input type=time name="editTime" value="<%=plan.getPlan_time()%>" class="input-text">
+					<div class="input-option">
+						<input type="text" name="editCom" value="<%=plan.getPlan()%>" class="input-text"> 
+					</div>
+					<div class="input-option inline-form">
+						<input type=date name="editDay" value="<%=plan.getPlan_day()%>" class="input-text">
+						<input type=time name="editTime" value="<%=plan.getPlan_time()%>" class="input-text">
+					</div>
 					<input type="submit" value="完了" name="submit" class="btn">
-					<br>
 					<%
 					}
 					%>
@@ -165,43 +171,45 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 
 		<h1>Chat</h1>
 		<div class="action-area">
-			<div class="lists-back-ground">
-				<table>
+			<div class="todoChat">
+				<div class="lists-back-ground-todoChat">
+					<table>
 
-					<%
-					if (chatList != null) {
-					%>
+						<%
+						if (chatList != null) {
+						%>
 
-					<%
-					for (ChatData chat : chatList) {
-					%>
+						<%
+						for (ChatData chat : chatList) {
+						%>
 
-					<%
-					if (chat.getChat() != null && chat.getChat().length() != 0) {
-					%>
+						<%
+						if (chat.getChat() != null && chat.getChat().length() != 0) {
+						%>
 
-					<%
-					// フォーマットを指定してSimpleDateFormatを作成
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd  HH:mm");
-					//タイムスタンプを文字列に変換
-					String formattedChat_day = sdf.format(chat.getChat_day());
-					%>
-					<tr>
-						<td><%=chat.getUser_name()%> :</td>
-						<td><%=chat.getChat()%></td>
-						<td><%=formattedChat_day%></td>
-					</tr>
-					<%
-					}
-					%>
-					<%
-					}
-					%>
-					<%
-					}
-					%>
+						<%
+						// フォーマットを指定してSimpleDateFormatを作成
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd  HH:mm");
+						//タイムスタンプを文字列に変換
+						String formattedChat_day = sdf.format(chat.getChat_day());
+						%>
+						<tr>
+							<td><%=chat.getUser_name()%> :</td>
+							<td><%=chat.getChat()%></td>
+							<td><%=formattedChat_day%></td>
+						</tr>
+						<%
+						}
+						%>
+						<%
+						}
+						%>
+						<%
+						}
+						%>
 
-				</table>
+					</table>
+				</div>
 			</div>
 			<br>
 			<div class="error">
@@ -213,11 +221,12 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				}
 				%>
 			</div>
-				<form action="Chat" method="post" class="input-area">
-					<input type="text" name="chat" placeholder="チャットに参加する"
-						class="input-text"> <input type="submit" value="+"
-						class="btn" style="border-radius: 2rem">
-				</form>
+			<form action="Chat" method="post" class="input-option inline-form">
+				<input type="text" name="chat" placeholder="チャットに参加する"
+					class="input-text"> <input type="submit" value="+"
+					class="btn" style="border-radius: 2rem">
+			</form>
+
 		</div>
 
 		<a href="GroupLogout">Group Logout</a> <br>
