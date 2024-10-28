@@ -47,3 +47,5 @@ Group Share画面に「Chat」として作成。
 ## 【開発環境】
 - Eclipse
 - Git/GitHub
+- WinMerge
+- A5M2

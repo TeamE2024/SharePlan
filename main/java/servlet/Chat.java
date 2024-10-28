@@ -62,7 +62,7 @@ public class Chat extends HttpServlet {
 			request.setAttribute("errorMsg", "内容を入力してください。");
 		}
 		
-		// 最新のチャットリストを取得して、リクエストスコープに保存
+		// 最新のチャットリストを取得して、スコープに保存
 		//チャット内容をデータベースから取得しリストに保管
 		GetChatListLogic getChatListLogics = new GetChatListLogic();
 		List<ChatData> chatList = getChatListLogics.execute(loginGroup);
