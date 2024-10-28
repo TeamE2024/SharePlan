@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.CommentLogic;
 import model.MakeCalendar;
+import model.NotificationsLogic;
 import model.ScheduleData;
 
 /*
@@ -89,6 +90,9 @@ public class Schedule extends HttpServlet {
 		
 		//処理をするクラスインスタンスの作成
 		CommentLogic logic = new CommentLogic();
+		
+		//通知機能
+		NotificationsLogic add = new NotificationsLogic();
 
 		/*
 		 * 分岐・追加
@@ -105,6 +109,7 @@ public class Schedule extends HttpServlet {
 				
 				if (finalCheck) {
 					request.setAttribute("msg", "追加完了");
+					add.run();//通知
 				}else {
 					request.setAttribute("msg", "追加できませんでした");
 				}
@@ -152,6 +157,7 @@ public class Schedule extends HttpServlet {
 					boolean finalCheck = logic.editPlan(editPlanList.get(0).getId(),editCom,editDay,editTime);
 					if(finalCheck) {
 						request.setAttribute("msg", "編集完了");
+						add.run();//通知
 						planList = null;	
 						session.setAttribute("planList",planList);
 					} else {
@@ -168,7 +174,7 @@ public class Schedule extends HttpServlet {
 				
 					if (finalCheck) {
 						request.setAttribute("msg", "削除完了");
-					
+						add.run();//通知
 						planList = null;	
 						session.setAttribute("planList",planList);
 					} else {
