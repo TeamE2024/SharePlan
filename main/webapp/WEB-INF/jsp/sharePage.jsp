@@ -93,11 +93,10 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 					</table>
 				</div>
 			</div>
-
 			<%
 			if (msg != null) {
 			%>
-			<p><%=msg%></p>
+			<p class="error"><%=msg%></p>
 			<%
 			}
 			%>
@@ -136,6 +135,9 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				</div>
 				<div class="input-button-area">
 					<input type="submit" value="追加" name="submit" class="btn">
+					<input type="submit" value="編集" name="submit" class="btn">
+					<input type="submit" value="削除" name="submit" class="btn">
+				</div>
 					<%
 					}
 					%>
@@ -160,9 +162,6 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 					<%
 					}
 					%>
-					<input type="submit" value="編集" name="submit" class="btn">
-					<input type="submit" value="削除" name="submit" class="btn">
-				</div>
 			</form>
 		</div>
 		<br> <br>
