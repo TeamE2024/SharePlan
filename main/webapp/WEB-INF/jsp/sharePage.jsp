@@ -1,6 +1,7 @@
 <%@page import="model.ScheduleData"%>
 <%@page import="model.ChatData"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@page import="model.User"%>
 <%@page import="java.sql.Timestamp"%>
@@ -28,7 +29,20 @@ String loginGroup = (String) session.getAttribute("loginGroup");
 List<ChatData> chatList = (List<ChatData>) request.getAttribute("chatList");
 // リクエストスコープに保存されたエラーメッセージを取得
 String errorMsg = (String) request.getAttribute("errorMsg");
+
+//質問ボックスを出すトリガー的存在(文字の内容は関係ない…)
+String makeQ = (String) session.getAttribute("makeQ");
+//質問
+String question = (String) session.getAttribute("question");
+//選択肢を入力する箱の数のリスト
+List<Integer> optionNumberList = (List<Integer>) session.getAttribute("optionNumberList");
+//メッセージの表示
+String Emsg = (String) session.getAttribute("Emsg");
+
+//質問と<選択肢:投票数>を保持するMap
+Map<String, Map<String, Integer>> countMap = (Map<String, Map<String, Integer>>) application.getAttribute("countMap");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,14 +122,12 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				<%
 				for (ScheduleData plan : planList) {
 				%>
-
-				<input type="checkbox" name="plans"
-					value="<%=planList.indexOf(plan)%>"
-					<%if (selectedPlansInt != null && selectedPlansInt[0] == planList.indexOf(plan)) {%>
-					checked <%}%>>
-				<%=plan.getPlan_time().toString()%>
-				<%=plan.getPlan()%>
-
+				<div class="inline-form">
+					<input type="checkbox" name="plans"
+						value="<%=planList.indexOf(plan)%>"
+						<%if (selectedPlansInt != null && selectedPlansInt[0] == planList.indexOf(plan)) {%>
+						checked <%}%>><%=plan.getPlan_time().toString()%> <%=plan.getPlan()%>
+				</div>
 				<%
 				}
 				%>
@@ -130,38 +142,40 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 					<input type="text" name="scheduleCom" class="input-text">
 				</div>
 				<div class="input-option inline-form">
-					<input type=date name="day" class="input-text">
-					<input type=time name="time" class="input-text">
+					<input type=date name="day" class="input-text"> <input
+						type=time name="time" class="input-text">
 				</div>
 				<div class="input-button-area">
 					<input type="submit" value="追加" name="submit" class="btn">
 					<input type="submit" value="編集" name="submit" class="btn">
 					<input type="submit" value="削除" name="submit" class="btn">
 				</div>
-					<%
-					}
-					%>
+				<%
+				}
+				%>
 
-					<%
-					if (editPlanList != null) {
-					%>
-					<%
-					for (ScheduleData plan : editPlanList) {
-					%>
-					<div class="input-option">
-						<input type="text" name="editCom" value="<%=plan.getPlan()%>" class="input-text"> 
-					</div>
-					<div class="input-option inline-form">
-						<input type=date name="editDay" value="<%=plan.getPlan_day()%>" class="input-text">
-						<input type=time name="editTime" value="<%=plan.getPlan_time()%>" class="input-text">
-					</div>
-					<input type="submit" value="完了" name="submit" class="btn">
-					<%
-					}
-					%>
-					<%
-					}
-					%>
+				<%
+				if (editPlanList != null) {
+				%>
+				<%
+				for (ScheduleData plan : editPlanList) {
+				%>
+				<div class="input-option">
+					<input type="text" name="editCom" value="<%=plan.getPlan()%>"
+						class="input-text">
+				</div>
+				<div class="input-option inline-form">
+					<input type=date name="editDay" value="<%=plan.getPlan_day()%>"
+						class="input-text"> <input type=time name="editTime"
+						value="<%=plan.getPlan_time()%>" class="input-text">
+				</div>
+				<input type="submit" value="完了" name="submit" class="btn">
+				<%
+				}
+				%>
+				<%
+				}
+				%>
 			</form>
 		</div>
 		<br> <br>
@@ -226,10 +240,102 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 					class="btn" style="border-radius: 2rem">
 			</form>
 
-		</div>
+			<div>
+				<%
+				if (Emsg != null) {
+				%>
+				<%=Emsg%>
+				<%
+				}
+				%>
+				<%
+				if (makeQ == null || makeQ.length() == 0) {
+				%>
+				<form action="MakeQuestion" method="get">
+					<input type="submit" value="アンケート作成" name="makeQ" class="btn">
+				</form>
+				<%
+				} else {
+				%>
+				<form action="MakeQuestion" method="post">
+					<label for="question">質問:</label><br> <input type="text"
+						id="question" name="question" <%if (question != null) {%>
+						value="<%=question%>" <%}%>><br>
+					<%
+					if (optionNumberList != null && optionNumberList.size() != 0) {
+						for (Integer number : optionNumberList) {
+					%>
+					選択肢<%=number%><br>
+					<input type="text" name="text"><br>
+					<%
+					}
+					%>
+					<input type="submit" value="選択肢削除" name="submit" class="btn">
+					<%
+					}
+					%>
+					<input type="submit" value="選択肢追加" name="submit" class="btn">
+					<%
+					if (question == null || Emsg == null) {
+					%>
+					<input type="submit" value="完了" name="submit" class="btn">
+					<%
+					} else if (question != null && Emsg.equals("選択肢をYESとNOにしますか？")) {
+					%>
+					<input type="submit" value="確定" name="submit" class="btn">
+					<%
+					}
+					%>
+				</form>
+				<%
+				}
+				%>
 
+				<%
+				if (countMap != null) {
+				%>
+				<form action="SelectQuestion" method="post">
+					<%
+					for (String inQuestion : countMap.keySet()) {
+					%>
+					<br>質問：<%=inQuestion%><br>
+					<%
+					Map<String, Integer> count = countMap.get(inQuestion);
+					%>
+					<%
+					if (count != null) {
+					%>
+					<%
+					for (String str : count.keySet()) {
+					%>
+					<input type="radio" name="select" value="<%=str%>"><%=str%>
+					<%
+					}
+					%>
+					<br>【アンケート結果】<br>
+					<%
+					for (String str : count.keySet()) {
+					%>
+					＜<%=str%>:<%=count.get(str)%>票＞
+					<%
+					}
+					%>
+					<%
+					}
+					%>
+					<br>
+					<%
+					}
+					%>
+					<br>
+					<input type="submit" value="送信" class="btn">
+				</form>
+				<%
+				}
+				%>
+			</div>
+		</div>
 		<a href="GroupLogout">Group Logout</a> <br>
 	</div>
-
 </body>
 </html>
