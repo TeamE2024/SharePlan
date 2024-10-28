@@ -183,6 +183,10 @@ public class Schedule extends HttpServlet {
 			
 		}
 		
+		//グループ名を取得
+		String loginGroup = (String)session.getAttribute("loginGroup");
+		System.out.println("loginGroup確認:" + loginGroup);		
+		
 		// 最新のチャットリストを取得して、表示するため
 		//チャット内容をデータベースから取得しリストに保管
 		GetChatListLogic getChatListLogics = new GetChatListLogic();
