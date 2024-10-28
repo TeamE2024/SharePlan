@@ -65,7 +65,7 @@ public class Schedule extends HttpServlet {
 		// 最新のチャットリストを取得して、表示するため
 		//チャット内容をデータベースから取得しリストに保管
 		GetChatListLogic getChatListLogics = new GetChatListLogic();
-		List<ChatData> chatList = getChatListLogics.execute(loginGroup);
+		List<ChatData> chatList = getChatListLogics.execute(group_name);
 		request.setAttribute("chatList", chatList);		
 		
 		//フォワード
