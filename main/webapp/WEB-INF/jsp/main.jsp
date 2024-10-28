@@ -37,9 +37,17 @@ String group_error_message = (String) request.getAttribute("group_error_message"
 							if (todolist.isComplete()) {
 							%>
 							<th><input type="radio" name="select"
-								value=<%=todolist.getId()%>> <%=todolist.getTodo_day()%></th>
+								value=<%=todolist.getId()%> > <%=todolist.getTodo_day()%></th>
 							<td><del><%=todolist.getList()%></del></td>
-
+							<%
+							if(label != null){
+							%>
+							<th><input type="radio" name="select"
+								value=<%=todolist.getId()%> checked> <%=todolist.getTodo_day()%></th>
+							<td><del><%=todolist.getList()%></del></td>
+							<%
+							}
+							%>
 
 							<%
 							if (todolist.isComplete()) {
@@ -65,8 +73,17 @@ String group_error_message = (String) request.getAttribute("group_error_message"
 						%>
 						<tr>
 							<th><input type="radio" name="select"
-								value=<%=todolist.getId()%>> <%=todolist.getTodo_day()%></th>
+								value=<%=todolist.getId()%> > <%=todolist.getTodo_day()%></th>
 							<td><%=todolist.getList()%></td>
+							<%
+							if(label != null){
+							%>
+							<th><input type="radio" name="select"
+								value=<%=todolist.getId()%> checked> <%=todolist.getTodo_day()%></th>
+							<td><del><%=todolist.getList()%></del></td>
+							<%
+							}
+							%>
 
 							<%
 							if (todolist.isComplete()) {
