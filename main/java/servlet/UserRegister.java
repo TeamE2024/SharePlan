@@ -30,6 +30,11 @@ public class UserRegister extends HttpServlet {
 		String pass = request.getParameter("password");
 		String msg = "";
 
+		//NGワード
+		String strNG = "NG";
+		String str1 = "死";
+		String str2 = "death";
+
 		if (name == null || name.length() == 0) {
 			msg += "ユーザー名が入力されておりません<br>";
 
@@ -43,7 +48,7 @@ public class UserRegister extends HttpServlet {
 			if (name.length() < 4 || name.length() > 16) {
 				msg += "ユーザー名は4文字以上、16文字以下で入力してください<br>";
 			}
-
+			
 		}
 
 		if (pass != null && pass.length() != 0) {
@@ -51,6 +56,19 @@ public class UserRegister extends HttpServlet {
 				msg += "パスワード4文字以上、8文字以下で入力してください<br>";
 			}
 
+		}
+
+		//NGワードが含まれたらエラーメッセージ 
+		
+		//デモ用NGワード "NG"
+		if (name.contains(strNG) || pass.contains(strNG)) {
+			msg += "ユーザー名かパスワードにNG WORDが含まれています。<br>";
+		}
+		
+		if (name.contains(str1) || pass.contains(str1)) {
+			msg += "ユーザー名かパスワードにNG WORDが含まれています。<br>";
+		} else if (name.contains(str2) || pass.contains(str2)) {
+			msg += "ユーザー名かパスワードにNG WORDが含まれています。<br>";
 		}
 
 		if (msg.isEmpty()) {
@@ -67,11 +85,9 @@ public class UserRegister extends HttpServlet {
 				} else {
 					msg += "ユーザー登録出来ませんでした<br>";
 				}
-			}else {
+			} else {
 				msg += "既に登録されているユーザー名です<br>";
 			}
-
-			
 
 		}
 
