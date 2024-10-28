@@ -35,7 +35,7 @@ public class Chat extends HttpServlet {
 		String loginUser_name = (String)session.getAttribute("loginUser");
 		System.out.println("loginUser_name確認" + loginUser_name);
 										
-		//グループ名を取得：2回目は退室した後、入室した際に上書きされる。
+		//グループ名を取得
 		String loginGroup = (String)session.getAttribute("loginGroup");
 		System.out.println("loginGroup確認:" + loginGroup);		
 		
