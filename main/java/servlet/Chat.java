@@ -37,12 +37,14 @@ public class Chat extends HttpServlet {
 										
 		//グループ名を取得
 		String loginGroup = (String)session.getAttribute("loginGroup");
-		System.out.println("loginGroup確認:" + loginGroup);		
+		System.out.println("loginGroup確認:" + loginGroup);	
+		
+		//エラーメッセージをリセット
+		session.removeAttribute("errorMsg");
 		
 		
 		// 入力値チェック
 		if (chat != null && chat.length() != 0 && chat.length() <= 100) {//chat情報が入っている、100文字以下の場合登録可
-			System.out.println("if文入る" + chat);
 			
 			// チャット内容をChatテーブルへ1件追加する
 			ChatData chatData = new ChatData(loginUser_name, loginGroup, chat);
@@ -50,28 +52,26 @@ public class Chat extends HttpServlet {
 			boolean chatlogic = postChatLogic.execute(chatData);
 			
 			if(!chatlogic) {//chatlogicがfalseの時：データベース上でのエラーの時
-				// エラーメッセージをリクエストスコープに保存
-				request.setAttribute("errorMsg", "メッセージが投稿できませんでした");
+				// エラーメッセージをセッションスコープに保存
+				session.setAttribute("errorMsg", "メッセージが投稿できませんでした");
 			}
 			
 		}else if(chat.length() >= 101){//chat情報が100文字を超えていたらエラーメッセージを表示
-			// エラーメッセージをリクエストスコープに保存
-			request.setAttribute("errorMsg", "100文字以下で入力してください。改行も1文字に含まれます。");
+			// エラーメッセージをセッションスコープに保存
+			session.setAttribute("errorMsg", "100文字以下で入力してください。改行も1文字に含まれます。");
 		}else if(chat == null || chat.length() == 0){
-			// エラーメッセージをリクエストスコープに保存
-			request.setAttribute("errorMsg", "内容を入力してください。");
+			// エラーメッセージをセッションスコープに保存
+			session.setAttribute("errorMsg", "内容を入力してください。");
 		}
 		
 		// 最新のチャットリストを取得して、スコープに保存
 		//チャット内容をデータベースから取得しリストに保管
 		GetChatListLogic getChatListLogics = new GetChatListLogic();
 		List<ChatData> chatList = getChatListLogics.execute(loginGroup);
-		request.setAttribute("chatList", chatList);						
+		session.setAttribute("chatList", chatList);						
 		
-		// メイン画面にフォワード
-		RequestDispatcher dispatcher =
-				request.getRequestDispatcher("WEB-INF/jsp/sharePage.jsp");
-		dispatcher.forward(request, response);
+		// sharePage画面にリダイレクト
+		response.sendRedirect("Schedule");
 		
 	}
 }

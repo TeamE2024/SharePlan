@@ -24,10 +24,10 @@ int[] selectedPlansInt = (int[]) request.getAttribute("selectedPlansInt");
 String loginUser_name = (String) session.getAttribute("loginUser");
 //セッションスコープからグループ名を取得
 String loginGroup = (String) session.getAttribute("loginGroup");
-// リクエストスコープに保存されたチャットリストを取得
-List<ChatData> chatList = (List<ChatData>) request.getAttribute("chatList");
-// リクエストスコープに保存されたエラーメッセージを取得
-String errorMsg = (String) request.getAttribute("errorMsg");
+//セッションスコープに保存されたチャットリストを取得
+List<ChatData> chatList = (List<ChatData>) session.getAttribute("chatList");
+//セッションスコープに保存されたエラーメッセージを取得
+String errorMsg = (String) session.getAttribute("errorMsg");
 %>
 <!DOCTYPE html>
 <html>
