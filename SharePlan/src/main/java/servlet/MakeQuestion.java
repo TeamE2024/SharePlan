@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import model.QuestionLogic;
 
-@WebServlet("/MakeQuestion2")
-public class MakeQuestion2 extends HttpServlet {
+@WebServlet("/MakeQuestion")
+public class MakeQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*
@@ -58,7 +58,7 @@ public class MakeQuestion2 extends HttpServlet {
 				session.setAttribute("makeQ", makeQ);
 			}
 		}
-		response.sendRedirect("makeQuestion.jsp");
+		response.sendRedirect("Schedule");
 
 	}
 
@@ -125,6 +125,6 @@ public class MakeQuestion2 extends HttpServlet {
 		}
 
 		// ビューへ遷移するためのロジック
-		response.sendRedirect("makeQuestion.jsp");
+		response.sendRedirect("Schedule");
 	}
 }

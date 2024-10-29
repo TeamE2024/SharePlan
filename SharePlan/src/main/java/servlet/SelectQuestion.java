@@ -77,6 +77,6 @@ public class SelectQuestion extends HttpServlet {
 			application.setAttribute("countMap", countMap);
 		}
 
-		response.sendRedirect("makeQuestion.jsp");
+		response.sendRedirect("Schedule");
 	}
 }

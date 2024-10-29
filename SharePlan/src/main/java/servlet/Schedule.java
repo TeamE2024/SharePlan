@@ -16,6 +16,8 @@ import model.CommentLogic;
 import model.MakeCalendar;
 import model.NotificationsLogic;
 import model.ScheduleData;
+import model.GetChatListLogic;
+import model.ChatData;
 
 /*
  * スケジュールサーブレット
