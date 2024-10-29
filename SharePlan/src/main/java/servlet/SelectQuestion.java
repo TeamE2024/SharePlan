@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 public class SelectQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/*
 	 * 投票処理サーブレット
 	 */
@@ -30,7 +29,7 @@ public class SelectQuestion extends HttpServlet {
 		//ユーザー名の取得
 		String user_name = (String)session.getAttribute("loginUser");
 		
-		//選択された質問の取得
+		//選択された選択肢の取得
 		String select = request.getParameter("select");
 		
 		//ラジオボタンが選択されてない時
@@ -54,9 +53,15 @@ public class SelectQuestion extends HttpServlet {
 				application.setAttribute("countUser", countUser);
 				
 				//質問と選択肢から投票数を取得
-				int count = countMap.get(question).get(select);
-				//投票数をプラス１する
-				countMap.get(question).put(select, count + 1);
+				if (countMap != null) {
+					Map<String,Integer> QandA = countMap.get(question);
+					
+					if (QandA != null && QandA.get(select) != null) {
+						int count = QandA.get(select);
+						//投票数をプラス１する
+						QandA.put(select, count + 1);
+					} 
+				}
 				
 			} else {
 				// ユーザーが投票してない時
@@ -64,10 +69,15 @@ public class SelectQuestion extends HttpServlet {
 					countUser.put(user_name, question);
 					application.setAttribute("countUser", countUser);
 					
-					//質問と選択肢から投票数を取得
-					int count = countMap.get(question).get(select);
-					//投票数をプラス１する
-					countMap.get(question).put(select, count + 1);
+					if (countMap != null) {
+						Map<String,Integer> QandA = countMap.get(question);
+						
+						if (QandA != null && QandA.get(select) != null) {
+							int count = QandA.get(select);
+							//投票数をプラス１する
+							QandA.put(select, count + 1);
+						} 
+					}
 					
 				//ユーザー名と質問を保持するマップのユーザー名の確認	
 				}else if (countUser.containsKey(user_name) && countUser.get(user_name).equals(question)) {
