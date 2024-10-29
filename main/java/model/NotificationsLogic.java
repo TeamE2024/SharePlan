@@ -30,7 +30,7 @@ public class NotificationsLogic {
 			public void actionPerformed(ActionEvent e) {
 //	            url
 				try {
-		            URI uri = new URI("http://localhost:8080/sharePlan_y/Schedule");
+		            URI uri = new URI("http://localhost:8080/sharePlan/index.jsp");
 		            if (Desktop.isDesktopSupported()) {
 		                Desktop.getDesktop().browse(uri);
 		            } else {
