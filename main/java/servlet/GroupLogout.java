@@ -22,6 +22,7 @@ public class GroupLogout extends HttpServlet {
         
         if (session != null) {
         	session.removeAttribute("loginGroup");
+        	session.removeAttribute("chatList");
             System.out.println("グループのセッションオブジェクト破棄完了");
         } else {
             System.out.println("グループセッションは存在しない");
