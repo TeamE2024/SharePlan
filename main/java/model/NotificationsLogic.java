@@ -36,6 +36,7 @@ public class NotificationsLogic {
 		            } else {
 		                System.out.println("Desktop is not supported.");
 		            }
+				tray.remove(icon);	
 		        } catch (Exception E) {
 		            E.printStackTrace();
 		        }
