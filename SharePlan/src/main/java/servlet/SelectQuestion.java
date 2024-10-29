@@ -29,7 +29,6 @@ public class SelectQuestion extends HttpServlet {
 		//ユーザー名の取得
 		String user_name = (String)session.getAttribute("loginUser");
 		
-		
 		//選択された質問の取得
 		String select = request.getParameter("select");
 		
@@ -53,25 +52,25 @@ public class SelectQuestion extends HttpServlet {
 				countUser.put(user_name, question);
 				application.setAttribute("countUser", countUser);
 				
-				//質問がMapに存在するか&&その質問の中に選択された選択肢があるか
-				if (countMap.containsKey(question) && countMap.get(question).containsKey(select)) {
-		            int count = countMap.get(question).get(select);
-		            countMap.get(question).put(select, count + 1);
-		        } 
+				//質問と選択肢から投票数を取得
+				int count = countMap.get(question).get(select);
+				//投票数をプラス１する
+				countMap.get(question).put(select, count + 1);
+				
 			} else {
 				//ユーザー名と質問を保持するマップのユーザー名の確認
-				if (countUser.containsKey(user_name) && countUser.get(user_name) == question) {
+				if (countUser.containsKey(user_name) && countUser.get(user_name).equals(question)) {
 					session.setAttribute("Emsg", "既に投票済みです");
 					
 				} else {
 					countUser.put(user_name, question);
 					application.setAttribute("countUser", countUser);
 					
-					//質問がMapに存在するか&&その質問の中に選択された選択肢があるか
-					if (countMap.containsKey(question) && countMap.get(question).containsKey(select)) {
-			            int count = countMap.get(question).get(select);
-			            countMap.get(question).put(select, count + 1);
-			        } 
+					//質問と選択肢から投票数を取得
+					int count = countMap.get(question).get(select);
+					//投票数をプラス１する
+					countMap.get(question).put(select, count + 1);
+					
 				}
 			}
 			application.setAttribute("countMap", countMap);
