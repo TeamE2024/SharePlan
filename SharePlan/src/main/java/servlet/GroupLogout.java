@@ -22,12 +22,15 @@ public class GroupLogout extends HttpServlet {
         
         if (session != null) {
         	session.removeAttribute("loginGroup");
-        	session.removeAttribute("chatList");
-            System.out.println("グループのセッションオブジェクト破棄完了");
+        	System.out.println("グループのセッションオブジェクト破棄完了");
         } else {
             System.out.println("グループセッションは存在しない");
         }
-
+        session.removeAttribute("makeQ");
+		session.removeAttribute("Emsg");
+		session.removeAttribute("question");
+		session.removeAttribute("optionNumberList");
+        
 		// 個人画面にリダイレクト
 		response.sendRedirect("Main");
 	}
