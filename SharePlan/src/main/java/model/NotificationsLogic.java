@@ -19,7 +19,7 @@ public class NotificationsLogic {
 		SystemTray tray = SystemTray.getSystemTray(); // システムトレイを取得
 
 		PopupMenu popup = new PopupMenu(); // ※4 ポップアップメニューを生成
-		Image image = Toolkit.getDefaultToolkit().createImage(ClassLoader.getSystemResource("C;\\icon.png")); // アイコン画像を準備
+		Image image = Toolkit.getDefaultToolkit().createImage("logo画像のパス(logo4がおすすめ)"); // アイコン画像を準備
 		TrayIcon icon = new TrayIcon(image, "Sample Java App", popup); // ※4 トレイアイコンとして生成
 		icon.setImageAutoSize(true); // リサイズ
 
