@@ -129,6 +129,7 @@ public class Main extends HttpServlet {
 						break;
 						
 				case "完了":
+					if(select != null) {
 					String editList = (String) request.getParameter("list");
 					String strTodo_day = request.getParameter("todo_day");
 		
@@ -142,6 +143,9 @@ public class Main extends HttpServlet {
 						
 					} else {
 						message += "追加したい予定が未入力です";
+					}
+					}else {
+						message += "操作が誤りです";
 					}
 					break;
 		
