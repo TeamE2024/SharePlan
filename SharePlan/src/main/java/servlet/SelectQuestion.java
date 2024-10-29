@@ -28,7 +28,7 @@ public class SelectQuestion extends HttpServlet {
 		
 		//ユーザー名の取得
 		String user_name = (String)session.getAttribute("loginUser");
-		user_name ="mm";
+		
 		
 		//選択された質問の取得
 		String select = request.getParameter("select");
