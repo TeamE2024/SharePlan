@@ -127,7 +127,8 @@ Map<String, Map<String, Integer>> countMap = (Map<String, Map<String, Integer>>)
 					<input type="checkbox" name="plans"
 						value="<%=planList.indexOf(plan)%>"
 						<%if (selectedPlansInt != null && selectedPlansInt[0] == planList.indexOf(plan)) {%>
-						checked <%}%>><%=plan.getPlan_time().toString()%> <%=plan.getPlan()%>
+						checked <%}%>><%=plan.getPlan_time().toString()%>
+					<%=plan.getPlan()%>
 				</div>
 				<%
 				}
@@ -241,17 +242,22 @@ Map<String, Map<String, Integer>> countMap = (Map<String, Map<String, Integer>>)
 					class="btn" style="border-radius: 2rem">
 			</form>
 
-			<div>
+
+			<div class="input-area">
+
 				<%
 				if (Emsg != null) {
 				%>
-				<%=Emsg%>
+				<div class="error">
+					<%=Emsg%>
+				</div>
 				<%
 				}
 				%>
 				<%
 				if (makeQ == null || makeQ.length() == 0) {
 				%>
+
 				<form action="MakeQuestion" method="get">
 					<input type="submit" value="アンケート作成" name="makeQ" class="btn">
 				</form>
@@ -259,15 +265,13 @@ Map<String, Map<String, Integer>> countMap = (Map<String, Map<String, Integer>>)
 				} else {
 				%>
 				<form action="MakeQuestion" method="post">
-					<label for="question">質問:</label><br> <input type="text"
-						id="question" name="question" <%if (question != null) {%>
-						value="<%=question%>" <%}%>><br>
+					<label for="question">質問:</label>
+					<input type="text" id="question" name="question" <%if (question != null) {%> value="<%=question%>" <%}%> class="input-text question"><br>
 					<%
 					if (optionNumberList != null && optionNumberList.size() != 0) {
 						for (Integer number : optionNumberList) {
 					%>
-					選択肢<%=number%><br>
-					<input type="text" name="text"><br>
+					選択肢<%=number%><br> <input type="text" name="text" class="input-text question"><br>
 					<%
 					}
 					%>
@@ -328,8 +332,7 @@ Map<String, Map<String, Integer>> countMap = (Map<String, Map<String, Integer>>)
 					<%
 					}
 					%>
-					<br>
-					<input type="submit" value="送信" class="btn">
+					<br> <input type="submit" value="送信" class="btn">
 				</form>
 				<%
 				}

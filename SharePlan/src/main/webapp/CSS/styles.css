@@ -355,6 +355,11 @@ img {
 	box-sizing: border-box;
 }
 
+.question{
+	margin: 0.5rem auto;
+	padding: var(--small);
+}
+
 
 
 /* ボタン */
