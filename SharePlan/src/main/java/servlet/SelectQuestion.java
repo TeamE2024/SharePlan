@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 public class SelectQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	/*
 	 * 投票処理サーブレット
 	 */
@@ -58,11 +59,8 @@ public class SelectQuestion extends HttpServlet {
 				countMap.get(question).put(select, count + 1);
 				
 			} else {
-				//ユーザー名と質問を保持するマップのユーザー名の確認
-				if (countUser.containsKey(user_name) && countUser.get(user_name).equals(question)) {
-					session.setAttribute("Emsg", "既に投票済みです");
-					
-				} else {
+				// ユーザーが投票してない時
+				if (!countUser.containsKey(user_name)) {
 					countUser.put(user_name, question);
 					application.setAttribute("countUser", countUser);
 					
@@ -71,6 +69,12 @@ public class SelectQuestion extends HttpServlet {
 					//投票数をプラス１する
 					countMap.get(question).put(select, count + 1);
 					
+				//ユーザー名と質問を保持するマップのユーザー名の確認	
+				}else if (countUser.containsKey(user_name) && countUser.get(user_name).equals(question)) {
+					session.setAttribute("Emsg", "既に投票済みです");
+					
+				} else {
+					session.setAttribute("Emsg", "不明なアクションです");
 				}
 			}
 			application.setAttribute("countMap", countMap);
