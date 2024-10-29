@@ -69,7 +69,8 @@ public class Schedule extends HttpServlet {
 		//チャット内容をデータベースから取得しリストに保管
 		GetChatListLogic getChatListLogics = new GetChatListLogic();
 		List<ChatData> chatList = getChatListLogics.execute(group_name);
-		request.setAttribute("chatList", chatList);		
+		session.setAttribute("chatList", chatList);		
+		session.removeAttribute("errorMsg");
 		
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/sharePage.jsp");
@@ -199,7 +200,8 @@ public class Schedule extends HttpServlet {
 		//チャット内容をデータベースから取得しリストに保管
 		GetChatListLogic getChatListLogics = new GetChatListLogic();
 		List<ChatData> chatList = getChatListLogics.execute(loginGroup);
-		request.setAttribute("chatList", chatList);		
+		session.setAttribute("chatList", chatList);	
+		session.removeAttribute("errorMsg");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/sharePage.jsp");
 		dispatcher.forward(request, response);
